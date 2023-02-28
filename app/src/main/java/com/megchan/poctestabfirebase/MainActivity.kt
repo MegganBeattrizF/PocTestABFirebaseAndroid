@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSwitch() {
         with(binding.switchFeatureEnabled) {
-            isChecked = preferences.retrieveConsent()
+            isChecked = preferences.retrieveAutomaticDebitEnabled()
             setOnCheckedChangeListener { _, isGranted ->
                 preferences.savePreference(isGranted)
             }

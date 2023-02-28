@@ -19,6 +19,6 @@ class LocalPreferencesStorage(
         .apply()
 
 
-    fun retrieveConsent(): Boolean = preference.getBoolean("consent", false)
+    fun retrieveAutomaticDebitEnabled(): Boolean = preference.getBoolean("consent", false)
 
 }
