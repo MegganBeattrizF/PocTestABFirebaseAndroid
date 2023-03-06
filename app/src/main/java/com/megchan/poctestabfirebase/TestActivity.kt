@@ -35,7 +35,7 @@ class TestActivity : AppCompatActivity() {
         remoteConfig.apply {
             val settings = remoteConfigSettings {
                 fetchTimeoutInSeconds = 5
-                minimumFetchIntervalInSeconds = 5
+                minimumFetchIntervalInSeconds = 3600
             }
             setDefaultsAsync(R.xml.remote_config_defalts)
             setConfigSettingsAsync(settings)
@@ -58,7 +58,7 @@ class TestActivity : AppCompatActivity() {
                         return@addOnCompleteListener
                     }
 
-                    val variableFlow = this[CONFIG_KEY_VARIABLES_ENABLED].asString()
+                    val variableFlow = this[CONFIG_KEY_INCENTIVE_VARIABLES].asString()
                     Log.d("testAB", "sucesso ao pegar do remoteConfig a $variableFlow")
                     if (variableFlow == CONFIG_VALUE_BANNER_ENABLED) {
                         binding.banner.visibility = View.VISIBLE
@@ -73,13 +73,13 @@ class TestActivity : AppCompatActivity() {
 
     private fun registerActivateEvent() {
         analytics.logEvent(ACTIVATED_TEST_AB) {
-            Log.d("testAB", "evento enviado: ativado pelo modal")
+            Log.d("testAB", "evento enviado: ativado")
         }
     }
 
     private fun registerNotActivateEvent() {
         analytics.logEvent(NOT_ACTIVATED_TEST_AB) {
-            Log.d("testAB", "evento enviado: nao ativado pelo modal")
+            Log.d("testAB", "evento enviado: nao ativado")
         }
     }
 
@@ -95,7 +95,7 @@ class TestActivity : AppCompatActivity() {
         private const val NOT_ACTIVATED_TEST_AB = "feature_not_activated"
         private const val CONFIG_VALUE_BANNER_ENABLED = "banner_enabled"
         private const val CONFIG_VALUE_MODAL_ENABLED = "modal_enabled"
-        private const val CONFIG_KEY_VARIABLES_ENABLED = "automatic_debit_incentive_views"
+        private const val CONFIG_KEY_INCENTIVE_VARIABLES = "automatic_debit_incentive_views"
         fun getStartIntent(context: Context) = Intent(context, TestActivity::class.java)
     }
 }
